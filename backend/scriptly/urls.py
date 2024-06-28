@@ -20,5 +20,5 @@ from django.urls import path, include  # Import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Use a string path to reference assistant's URLs
-    path('', include('assistant.urls'))
+    path('api/', include('assistant.urls')),
 ]
