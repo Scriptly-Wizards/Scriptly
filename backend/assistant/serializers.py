@@ -1,9 +1,11 @@
 from rest_framework import serializers
-import json
 
 
 class VideoDataSerializer(serializers.Serializer):
-    keywords = serializers.CharField(max_length=255, required=True)
+    keywords = serializers.ListField(
+        child=serializers.CharField(max_length=100),
+        required=True
+    )
     video_duration = serializers.CharField(max_length=50, required=True)
     video_scenes = serializers.CharField(max_length=500, required=False)
     video_type = serializers.CharField(max_length=100, required=True)
