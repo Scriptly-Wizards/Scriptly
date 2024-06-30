@@ -1,5 +1,8 @@
+"use client"
 import React from 'react';
 import NavBar from '../component/NavBar/NavBar';
+import { Provider } from 'react-redux';
+import store from '@/store';
 
 const layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -12,7 +15,11 @@ const layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <body>
         <div>
           <NavBar />
-          <main>{children}</main>
+          <main>
+            <Provider store={store}>
+              {children}
+            </Provider>
+          </main>
         </div>
       </body>
     </html>

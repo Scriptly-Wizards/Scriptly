@@ -5,6 +5,9 @@ import { styled } from '@mui/system';
 
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
+import { useDispatch } from "react-redux";
+import { setMessage } from "@/store/slice/dataSlice";
+import { useRouter } from "next/navigation";
 
 const Container = styled(Paper)({
     backgroundColor: "#ffffff",
@@ -28,18 +31,28 @@ const Container = styled(Paper)({
     margin: "20px 0",
   });
 
+// type Values = {
+//   Keywords: string;
+//   KeyMessages: string;
+//   VideoDuration: string;
+//   VideoType: string;
+//   VideoGenre: string;
+//   Purpose: string;
+//   Setting: string;
+//   ScriptFormat: string;
+//   Tone: string;
+//   VisualElements: string;
+//   AudioElements: string;
+// };
+
+/** req 格式 */
 type Values = {
-  Keywords: string;
-  KeyMessages: string;
-  VideoDuration: string;
-  VideoType: string;
-  VideoGenre: string;
-  Purpose: string;
-  Setting: string;
-  ScriptFormat: string;
-  Tone: string;
-  VisualElements: string;
-  AudioElements: string;
+  keywords: string;
+  videoDuration: string;
+  videoType: string;
+  purpose: string;
+  toneAndStyle: string;
+  scriptFormat: string;
 };
 
 const VideoTypeOptions = [
@@ -89,93 +102,113 @@ const ToneOptions = [
 ];
 
 const Form: React.FC = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [values, setValues] = useState<Values>({
-    Keywords: "",
-    KeyMessages: "",
-    VideoDuration: "",
-    VideoType: "",
-    VideoGenre: "",
-    Purpose: "",
-    Setting: "",
-    ScriptFormat: "",
-    Tone: "",
-    VisualElements: "",
-    AudioElements: "",
+    keywords: "",
+    videoDuration: "",
+    videoType: "",
+    purpose: "",
+    toneAndStyle: "",
+    scriptFormat: ""
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(values);
     // Add your submission logic here
+    const requestData = {
+      keywords: values.keywords.split(',').map(keyword => keyword.trim()),
+      video_duration: values.videoDuration,
+      video_type: values.videoType,
+      purpose: values.purpose,
+      tone_and_style: values.toneAndStyle,
+      script_format: values.scriptFormat,
+    };
+
+    console.log(requestData);
+
+    const response = await fetch('http://127.0.0.1:8000/api/v1/assistant/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    const result = await response.json();
+    console.log(result.data);
+    dispatch(setMessage(result.data));
+    // router.push('/preview');
   };
 
   return (
     <Container>
       <Title variant="h4">Tell us what you want?</Title>
       <FormContainer onSubmit={handleSubmit}>
-        <CustomTextField changeHandler={handleChange} label="Keywords" name="Keywords" 
+        <CustomTextField changeHandler={handleChange} label="Keywords" name="keywords" 
         placeholder="Core topics or phrases that should be prominently featured"/>
-        <CustomTextField changeHandler={handleChange} label="Key Messages" name="KeyMessages" 
+        {/* <CustomTextField changeHandler={handleChange} label="Key Messages" name="KeyMessages" 
         placeholder="Core points or messages that need to be conveyed"
-        />
-        <CustomTextField changeHandler={handleChange} label="Video Duration" name="VideoDuration" 
+        /> */}
+        <CustomTextField changeHandler={handleChange} label="Video Duration" name="videoDuration" 
         placeholder="Total length of the video (e.g., 30 seconds, 1 minutes)"/>
         <CustomDropDown
           label="Video Type"
-          name="VideoType"
+          name="videoType"
           changeHandler={handleChange}
           values={VideoTypeOptions}
-          currentValue={values.VideoType}
+          currentValue={values.videoType}
         />
-        <CustomDropDown
+        {/* <CustomDropDown
           label="Video Genre"
           name="VideoGenre"
           changeHandler={handleChange}
           values={VideoGenreOptions}
           currentValue={values.VideoGenre}
-        />
+        /> */}
         <CustomDropDown
           label="Purpose"
-          name="Purpose"
+          name="purpose"
           changeHandler={handleChange}
           values={PurposeOptions}
-          currentValue={values.Purpose}
+          currentValue={values.purpose}
         />
         <CustomDropDown
           label="Tone and Style"
-          name="Tone"
+          name="toneAndStyle"
           changeHandler={handleChange}
           values={ToneOptions}
-          currentValue={values.Tone}
+          currentValue={values.toneAndStyle}
         />
-        <CustomDropDown
+        {/* <CustomDropDown
           label="Setting and Location"
           name="Setting"
           changeHandler={handleChange}
           values={SettingOptions}
           currentValue={values.Setting}
-        />
+        /> */}
         <CustomDropDown
           label="Script Format"
-          name="ScriptFormat"
+          name="scriptFormat"
           changeHandler={handleChange}
           values={ScriptFormatOptions}
-          currentValue={values.ScriptFormat}
+          currentValue={values.scriptFormat}
         />
-        <CustomTextField
+        {/* <CustomTextField
           label="Visual Elements"
           name="VisualElements"
           changeHandler={handleChange}
           placeholder="Specific shots or angles (e.g., close-ups, wide shots, aerial shots)"
-        />
+        /> */}
 
-        <CustomTextField changeHandler={handleChange} label="Audio Elements" name="AudioElements" 
+        {/* <CustomTextField changeHandler={handleChange} label="Audio Elements" name="AudioElements" 
         placeholder="Background music, sound effects, voice-over details."/>
-        
+         */}
         
         <SubmitButton type="submit" variant="contained">
           Submit
