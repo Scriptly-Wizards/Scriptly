@@ -1,25 +1,43 @@
-"use client"
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { CustomMessage } from '@/store/slice/dataSlice';
+import { RootState } from '@/store';
 
 const Preview = () => {
-  const data = useSelector((state: RootState) => state.data.message);
-  
+  const dataFromStore = useSelector((state: RootState) => state.data.message);
+  const [data, setData] = useState<CustomMessage | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    console.log('Redux state data:', dataFromStore);
+  }, [dataFromStore]);
+
+  useEffect(() => {
+    setIsClient(true);
+    console.log('useEffect data', data)
+    console.log('useEffect dataFromStore', dataFromStore)
+    setData(dataFromStore);
+  }, [data, dataFromStore]);
+
+  if (!isClient) {
+    console.log('isClient data', data)
+    console.log('isClient dataFromStore', dataFromStore)
+    return <div suppressHydrationWarning={true}>Loading...</div>; // 或者顯示一個加載指示器
+  }
+
   return (
     <div>
       <h1>Preview Page</h1>
       {data ? (
-        data.map((message) => (
-          <div key={message.id}>
-            <pre>{JSON.stringify(message.content[0].text.value, null, 2)}</pre>
-          </div>
-        ))
+        <div suppressHydrationWarning={true}>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
       ) : (
         <p>No data to display</p>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Preview;

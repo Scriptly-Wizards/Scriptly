@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Paper, Button } from "@mui/material";
 import { styled } from '@mui/system';
 
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
 import { useDispatch } from "react-redux";
-import { setMessage } from "@/store/slice/dataSlice";
+import { CustomMessage, setMessage } from "@/store/slice/dataSlice";
 import { useRouter } from "next/navigation";
 
 const Container = styled(Paper)({
@@ -104,6 +104,7 @@ const ToneOptions = [
 const Form: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [values, setValues] = useState<Values>({
     keywords: "",
     videoDuration: "",
@@ -142,9 +143,15 @@ const Form: React.FC = () => {
 
     const result = await response.json();
     console.log(result.data);
-    dispatch(setMessage(result.data));
-    // router.push('/preview');
+    dispatch(setMessage(result.data as CustomMessage));
+    // setIsSubmitted(true);
   };
+
+  // useEffect(() => {
+  //   if (isSubmitted) {
+  //     router.push('/preview');
+  //   }
+  // }, [isSubmitted, router]);
 
   return (
     <Container>

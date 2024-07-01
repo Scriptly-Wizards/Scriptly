@@ -1,16 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Message {
+export interface CustomMessage {
   id: string;
-  content: { text: { annotations: any[], value: string }, type: string }[];
   created_at: number;
-  role: string;
-  run_id: string | null;
-  status: string | null;
+  value: string;
 }
 
 interface DataState {
-  message: Message[] | null;
+  message: CustomMessage | null;
 }
 
 const initialState: DataState = {
@@ -21,7 +18,7 @@ const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    setMessage: (state, action: PayloadAction<Message[]>) => {
+    setMessage: (state, action: PayloadAction<CustomMessage>) => {
       state.message = action.payload;
     },
   },
