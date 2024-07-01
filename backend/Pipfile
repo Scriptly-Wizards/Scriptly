@@ -8,6 +8,7 @@ django = "*"
 djangorestframework = "*"
 python-dotenv = "*"
 openai = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

@@ -1,6 +1,6 @@
 from openai import OpenAI
 from .event_handler import EventHandler
-
+import json
 
 class OpenAIService:
     def __init__(self):
@@ -43,7 +43,17 @@ class OpenAIService:
             messages = self.client.beta.threads.messages.list(
                 thread_id=self.thread.id
             ).model_dump_json()
-            return messages
+            
+            data = json.loads(messages)
+            if len(data) >= 1:
+                first_item = data['data'][0]
+                extracted_data = {
+                    'id': first_item['id'],
+                    'created_at': first_item['created_at'],
+                    'value': first_item['content'][0]['text']['value']
+                }
+                return {'data': extracted_data}
+            return {'data': 'No data found'}
         else:
             print(f"Run status: {run.status}")
-            return {"message": f"Run in status: {run.status}"}
+            return {"data": f"Run in status: {run.status}"}
