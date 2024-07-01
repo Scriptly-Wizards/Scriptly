@@ -24,7 +24,6 @@ class VideoDataView(APIView):
                 return Response({"error": "Failed to process request"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class MusicDataView(APIView):
     def post(self, request):
         token = request.headers.get('Authorization', 'default')
