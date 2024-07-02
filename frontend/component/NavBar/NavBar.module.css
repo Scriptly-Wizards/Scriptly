@@ -1,6 +1,21 @@
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff0050; /* TikTok pink */
+  cursor: pointer; /* Indicate clickable */
+  transition: color 0.3s ease; /* Animation for hover effect */
+}
+
+.logo:hover {
+  color: #ffffff; /* Change to white on hover */
+}
+
 .navbar {
-  background-color: #1f2937; /* gray-800 */
+  background-color: #000000; /* TikTok black */
   padding: 1rem; /* p-4 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar ul {
@@ -14,7 +29,30 @@
   margin-right: 1rem; /* mr-4 */
 }
 
+.navbar li:last-child {
+  margin-right: 0; /* Remove right margin for the last item */
+}
+
 .navbar a {
   color: #ffffff; /* text-white */
   text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease; /* Animation for hover effect */
+}
+
+.navbar a:hover {
+  color: #ff0050; /* TikTok pink on hover */
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.navbar {
+  animation: fadeIn 0.5s ease-in;
 }

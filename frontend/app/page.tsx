@@ -1,5 +1,5 @@
-"use client"
-import React, {useRef, useState, useEffect} from "react";
+"use client";
+import React, { useRef, useState, useEffect } from "react";
 import '../styles/globals.css';
 import Form from "@/component/Form/Form";
 
