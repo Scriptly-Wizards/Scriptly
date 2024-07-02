@@ -2,11 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* Basic reset and base styles */
+body, html {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--tiktok-black);
+}
+
+/* TikTok Palette */
+:root {
+  --tiktok-black: #000000;
+  --tiktok-pink: #ff0050;
+  --tiktok-white: #ffffff;
+  --tiktok-blue: #69c9d0;
+  --tiktok-gray: #1f2937;
+}
+
+/* Landing Page styles */
+ .landing-page {
+  background-color: var(--tiktok-black);
+  color: var(--tiktok-white);
+  transition: background-color 0.3s ease;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-page h1 {
+  color: var(--tiktok-pink);
+  animation: fadeIn 1s ease, slideInFromLeft 1s ease;
+}
+
+.landing-page button {
+  background-color: var(--tiktok-blue);
+  color: var(--tiktok-white);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: fadeIn 1.5s ease, slideInFromRight 1.5s ease;
+}
+
+.landing-page button:hover {
+  background-color: var(--tiktok-pink);
+  transform: scale(1.05);
+} 
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

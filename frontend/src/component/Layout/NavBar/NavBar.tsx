@@ -5,6 +5,9 @@ import styles from './NavBar.module.css';
 const NavBar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
+      <Link to="/">
+        <div className={styles.logo}>SCRIPTLY</div>
+      </Link>
       <ul>
         <li className={styles.li}><Link to="/" className={styles.a}>Home</Link></li>
         <li className={styles.li}><Link to="/contact" className={styles.a}>Contact Us</Link></li>
