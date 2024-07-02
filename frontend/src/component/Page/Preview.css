@@ -1,0 +1,46 @@
+/* markdown container css */
+.markdown-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+  max-width: 800px;
+  line-height: 1.6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.markdown-container h1,
+.markdown-container h2 {
+  color: #333;
+  font-weight: 600;
+}
+
+.markdown-container h2 {
+  margin-top: 20px;
+  font-size: 1.3em;
+}
+
+.markdown-container hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+.markdown-container p {
+  margin: 10px 0;
+}
+
+.markdown-container strong {
+  color: #555;
+}
+
+.markdown-container ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.markdown-container ul li {
+  margin: 10px 0;
+}
