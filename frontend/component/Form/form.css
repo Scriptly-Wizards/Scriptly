@@ -1,0 +1,42 @@
+/* Form Container */
+.FormContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Form Title */
+  .Title {
+    margin: 0px 0 20px 0;
+  }
+  
+  /* Form Submit Button */
+  .SubmitButton {
+    margin: 20px 0;
+    background-color: #69c9d0; /* TikTok blue */
+    color: #ffffff; /* TikTok white */
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .SubmitButton:hover {
+    background-color: #ff0050; /* TikTok pink */
+    transform: scale(1.05);
+  }
+  
+  /* Custom Text Field */
+  .CustomTextField {
+    margin-bottom: 20px;
+    /* Add more specific styles as needed */
+  }
+  
+  /* Custom DropDown */
+  .CustomDropDown {
+    margin-bottom: 20px;
+    /* Add more specific styles as needed */
+  }
+  

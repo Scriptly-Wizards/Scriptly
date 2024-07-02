@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Paper, Button } from "@mui/material";
 import { styled } from '@mui/system';
+import styles from './form.css';
+
 
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
@@ -14,6 +16,7 @@ const Container = styled(Paper)({
     padding: 30,
     textAlign: "center",
     width: "80%", // Adjust width as needed
+    height: "100%",
     maxWidth: 600,
     margin: "auto",
   });

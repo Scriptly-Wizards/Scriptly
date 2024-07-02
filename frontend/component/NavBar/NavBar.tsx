@@ -5,6 +5,9 @@ import styles from './NavBar.module.css';
 const NavBar = () => {
   return (
     <nav className={styles.navbar}>
+      <Link href="/" passHref>
+        <div className={styles.logo}>SCRIPTLY</div>
+      </Link>
       <ul>
         <li className={styles.li}><Link href="/" className={styles.a}>Home</Link></li>
         <li className={styles.li}><Link href="/contact" className={styles.a}>Contact Us</Link></li>
