@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './component/Layout/NavBar/NavBar';
 import Welcome from './component/Page/Welcome';
+import Preview from './component/Page/Preview';
 
 function App() {
   
@@ -12,7 +13,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/preview" />
+          <Route path="/preview" element={<Preview />}/>
         </Routes>
       </main>
     </div>

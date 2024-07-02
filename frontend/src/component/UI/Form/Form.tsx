@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Typography, Paper, Button } from "@mui/material";
 import { styled } from '@mui/system';
-import { useDispatch } from "react-redux";
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
+import { sendMessageReq } from "../../../store/message/message-service";
+import { useAppDispatch } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled(Paper)({
     backgroundColor: "#ffffff",
@@ -98,7 +100,8 @@ const ToneOptions = [
 ];
 
 const Form: React.FC = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [values, setValues] = useState<Values>({
     keywords: "",
@@ -128,25 +131,13 @@ const Form: React.FC = () => {
 
     console.log(requestData);
 
-    // const response = await fetch('http://127.0.0.1:8000/api/v1/assistant/', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(requestData),
-    // });
-
-    // const result = await response.json();
-    // console.log(result.data);
-    // dispatch(setMessage(result.data as CustomMessage));
-    // setIsSubmitted(true);
+    dispatch(sendMessageReq(requestData));
+    setIsSubmitted(true);
   };
 
-  // useEffect(() => {
-  //   if (isSubmitted) {
-  //     router.push('/preview');
-  //   }
-  // }, [isSubmitted, router]);
+  const handleNextPage = () => {
+    navigate('/preview');
+  }
 
   return (
     <Container>
@@ -216,6 +207,7 @@ const Form: React.FC = () => {
           Submit
         </SubmitButton>
       </FormContainer>
+      {isSubmitted && <button onClick={handleNextPage}>Preview</button>}
     </Container>
   );
 };
