@@ -2,6 +2,7 @@ from openai import OpenAI
 from .event_handler import EventHandler
 import json
 
+
 class OpenAIService:
     def __init__(self):
         self.client = OpenAI()
@@ -28,7 +29,7 @@ class OpenAIService:
         run = self.client.beta.threads.runs.create_and_poll(
             thread_id=self.thread.id,
             assistant_id=self.assistant.id,
-            instructions="Please address the user as Jane Doe. The user has a premium account."
+            instructions="Please ensure the text does not contain emojis."
         )
 
         # with self.client.beta.threads.runs.stream(
@@ -43,12 +44,12 @@ class OpenAIService:
             messages = self.client.beta.threads.messages.list(
                 thread_id=self.thread.id
             ).model_dump_json()
-            
+
             data = json.loads(messages)
             if len(data) >= 1:
                 first_item = data['data'][0]
                 extracted_data = {
-                    'id': first_item['id'],
+                    'id': first_item['thread_id'],
                     'created_at': first_item['created_at'],
                     'value': first_item['content'][0]['text']['value']
                 }
