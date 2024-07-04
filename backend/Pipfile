@@ -9,6 +9,8 @@ djangorestframework = "*"
 python-dotenv = "*"
 openai = "*"
 django-cors-headers = "*"
+markdown2 = '*'
+xhtml2pdf = '*'
 
 [dev-packages]
 
