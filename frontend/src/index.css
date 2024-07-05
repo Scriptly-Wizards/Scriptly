@@ -15,7 +15,7 @@ body, html {
   --tiktok-black: #000000;
   --tiktok-pink: #ff0050;
   --tiktok-white: #ffffff;
-  --tiktok-blue: #69c9d0;
+  --tiktok-blue: #2af0ea;
   --tiktok-gray: #1f2937;
 }
 
@@ -34,14 +34,18 @@ body, html {
   overflow: hidden;
 }
 
+
 .landing-page h1 {
   color: var(--tiktok-pink);
+  background-color: --tiktok-black;
   animation: fadeIn 1s ease, slideInFromLeft 1s ease;
+  font-size: 4rem;
+  /* margin-top: auto; */
 }
 
 .landing-page button {
-  background-color: var(--tiktok-blue);
-  color: var(--tiktok-white);
+  background-color: var(--tiktok-white);
+  color: var(--tiktok-black);
   border: none;
   padding: 1rem 2rem;
   font-size: 1rem;
