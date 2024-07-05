@@ -60,7 +60,7 @@ class GeneratePDFView(APIView):
             value_content = last_conversation_content[id]
             json_string = {"value": value_content}
         else:
-            json_string = {"error": "ID not found in conversation content"}
+            return Response({"error": "ID not found in conversation content"}, status=status.HTTP_404_NOT_FOUND)
 
         # 预处理内容
         processed_content = self.preprocess_content(json_string["value"])
