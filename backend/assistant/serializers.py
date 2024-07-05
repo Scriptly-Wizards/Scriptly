@@ -29,7 +29,7 @@ class VideoDataSerializer(serializers.Serializer):
         """
         Generates content in the specified format using serializer fields.
         """
-        content_format = "Now, I will share my keywords: {keywords}, video length: {video_duration}, video type: {video_type}, video purpose: {purpose}, with the goal of making a comprehensive and engaging video script for TikTok."
+        content_format = "Now, I will share my keywords: {keywords}, video length: {video_duration}, video type: {video_type}, video purpose: {purpose}, with the goal of making a comprehensive and engaging video script for TikTok. The script should not include emojis."
         return content_format.format(
             keywords=self.validated_data.get('keywords', 'N/A'),
             video_duration=self.validated_data.get('video_duration', 'N/A'),

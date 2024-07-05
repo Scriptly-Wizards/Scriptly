@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Paper, Button } from "@mui/material";
 import { styled } from '@mui/system';
 import CustomTextField from "./CustomTextField";
@@ -46,20 +46,6 @@ const SubmitButton = styled(Button)({
   animation: "slideInFromRight 1s ease",
 });
 
-
-// type Values = {
-//   Keywords: string;
-//   KeyMessages: string;
-//   VideoDuration: string;
-//   VideoType: string;
-//   VideoGenre: string;
-//   Purpose: string;
-//   Setting: string;
-//   ScriptFormat: string;
-//   Tone: string;
-//   VisualElements: string;
-//   AudioElements: string;
-// };
 
 /** req 格式 */
 type Values = {
@@ -121,6 +107,7 @@ const Form: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<Values>({
     keywords: "",
     videoDuration: "",
@@ -136,8 +123,7 @@ const Form: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
-    // Add your submission logic here
+  
     const requestData = {
       keywords: values.keywords.split(',').map(keyword => keyword.trim()),
       video_duration: values.videoDuration,
@@ -146,12 +132,16 @@ const Form: React.FC = () => {
       tone_and_style: values.toneAndStyle,
       script_format: values.scriptFormat,
     };
-
-    console.log(requestData);
-
-    dispatch(sendMessageReq(requestData));
+    setIsLoading(true);
+    await dispatch(sendMessageReq(requestData));
     setIsSubmitted(true);
   };
+
+  useEffect(() => {
+    if (isSubmitted) {
+      setIsLoading(false);
+    }
+  }, [isSubmitted]);
 
   const handleNextPage = () => {
     navigate('/preview');
@@ -163,9 +153,6 @@ const Form: React.FC = () => {
       <FormContainer onSubmit={handleSubmit}>
         <CustomTextField changeHandler={handleChange} label="Keywords" name="keywords" 
         placeholder="Core topics or phrases that should be prominently featured"/>
-        {/* <CustomTextField changeHandler={handleChange} label="Key Messages" name="KeyMessages" 
-        placeholder="Core points or messages that need to be conveyed"
-        /> */}
         <CustomTextField changeHandler={handleChange} label="Video Duration" name="videoDuration" 
         placeholder="Total length of the video (e.g., 30 seconds, 1 minutes)"/>
         <CustomDropDown
@@ -175,13 +162,6 @@ const Form: React.FC = () => {
           values={VideoTypeOptions}
           currentValue={values.videoType}
         />
-        {/* <CustomDropDown
-          label="Video Genre"
-          name="VideoGenre"
-          changeHandler={handleChange}
-          values={VideoGenreOptions}
-          currentValue={values.VideoGenre}
-        /> */}
         <CustomDropDown
           label="Purpose"
           name="purpose"
@@ -196,13 +176,6 @@ const Form: React.FC = () => {
           values={ToneOptions}
           currentValue={values.toneAndStyle}
         />
-        {/* <CustomDropDown
-          label="Setting and Location"
-          name="Setting"
-          changeHandler={handleChange}
-          values={SettingOptions}
-          currentValue={values.Setting}
-        /> */}
         <CustomDropDown
           label="Script Format"
           name="scriptFormat"
@@ -210,22 +183,39 @@ const Form: React.FC = () => {
           values={ScriptFormatOptions}
           currentValue={values.scriptFormat}
         />
-        {/* <CustomTextField
-          label="Visual Elements"
-          name="VisualElements"
-          changeHandler={handleChange}
-          placeholder="Specific shots or angles (e.g., close-ups, wide shots, aerial shots)"
-        /> */}
-
-        {/* <CustomTextField changeHandler={handleChange} label="Audio Elements" name="AudioElements" 
-        placeholder="Background music, sound effects, voice-over details."/>
-         */}
-        
         <SubmitButton type="submit" variant="contained">
           Submit
         </SubmitButton>
       </FormContainer>
-      {isSubmitted && <button onClick={handleNextPage} className="preview">Preview</button>}
+      <button onClick={handleNextPage} className={`${!isSubmitted ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
+        } text-white font-bold py-2 px-4 rounded flex items-center`} disabled={!isSubmitted} >
+          {isLoading ? (
+          <>
+            <svg
+              className="animate-spin h-5 w-5 mr-3 text-white"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Processing...
+          </>
+          ) : (
+            'Preview'
+          )}
+      </button>
     </Container>
   );
 };
