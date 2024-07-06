@@ -1,9 +1,11 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import messageReducer from "./message/message-slice";
+import messageReducer from "./message/messageSlice";
+import pdfReducer from "./pdf/pdfSlice";
 
 const store = configureStore({
   reducer: {
     message: messageReducer,
+    pdfFile: pdfReducer
   },
 });
 

@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { CustomMessage, setMessage } from "./message-slice";
+import { CustomMessage, setMessage } from "./messageSlice";
 
-/** req 格式 */
+/** sendMessage request body */
 export interface MessageReq {
   keywords: string[];
   video_duration: string;
@@ -10,13 +10,6 @@ export interface MessageReq {
   tone_and_style: string;
   script_format: string;
 };
-
-// keywords: values.keywords.split(',').map(keyword => keyword.trim()),
-// video_duration: values.videoDuration,
-// video_type: values.videoType,
-// purpose: values.purpose,
-// tone_and_style: values.toneAndStyle,
-// script_format: values.scriptFormat,
 
 export const sendMessageReq = (messageReq: MessageReq) => {
   return async (dispatch: Dispatch) => {

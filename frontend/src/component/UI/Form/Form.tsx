@@ -3,7 +3,7 @@ import { Typography, Paper, Button } from "@mui/material";
 import { styled } from '@mui/system';
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
-import { sendMessageReq } from "../../../store/message/message-service";
+import { sendMessageReq } from "../../../store/message/messageService";
 import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 
