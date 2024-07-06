@@ -1,12 +1,18 @@
 /* markdown container css */
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
 .markdown-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 20px auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2rem auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #ffffff;
-  max-width: 800px;
+  max-width: 1000px;
   line-height: 1.6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -43,4 +49,12 @@
 
 .markdown-container ul li {
   margin: 10px 0;
+}
+
+.download-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
