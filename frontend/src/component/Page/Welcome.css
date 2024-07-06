@@ -1,12 +1,13 @@
 /* Welcome.css */
 .landing-page {
-  height: 100vh;
+  height: 72vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  position: relative;
+  /* position: relative; */
+  margin: 1rem;
 }
 
 .welcome-image {
@@ -25,7 +26,6 @@
   border-radius: 0.25rem;
   position: relative;
   z-index: 10;
-  margin-top: -100px;
 }
 
 .welcome-description {
@@ -51,4 +51,10 @@
   color: white;
   border-radius: 0.25rem;
   z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .landing-page {
+    height: 100vh;
+  }
 }
