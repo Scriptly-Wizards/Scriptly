@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Paper, Button } from "@mui/material";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 import CustomTextField from "./CustomTextField";
 import CustomDropDown from "./CustomDropDown";
 import { sendMessageReq } from "../../../store/message/messageService";
 import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
+import { TagsInput } from "react-tag-input-component";
 
 const Container = styled(Paper)({
   backgroundColor: "Black",
   padding: "30px",
   textAlign: "center",
-  width: "100%", 
+  width: "100%",
   maxWidth: "800px",
   margin: "auto",
   marginTop: "1rem",
@@ -46,10 +47,8 @@ const SubmitButton = styled(Button)({
   animation: "slideInFromRight 1s ease",
 });
 
-
 /** sendMessageReq req body */
 type Values = {
-  keywords: string;
   videoDuration: string;
   videoType: string;
   purpose: string;
@@ -108,13 +107,13 @@ const Form: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [tag, setTag] = useState<string[]>([]);
   const [values, setValues] = useState<Values>({
-    keywords: "",
     videoDuration: "",
     videoType: "",
     purpose: "",
     toneAndStyle: "",
-    scriptFormat: ""
+    scriptFormat: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,18 +122,19 @@ const Form: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     const requestData = {
-      keywords: values.keywords.split(',').map(keyword => keyword.trim()),
+      keywords: tag,
       video_duration: values.videoDuration,
       video_type: values.videoType,
       purpose: values.purpose,
       tone_and_style: values.toneAndStyle,
       script_format: values.scriptFormat,
     };
-    setIsLoading(true);
-    await dispatch(sendMessageReq(requestData));
-    setIsSubmitted(true);
+    console.log(requestData);
+    // setIsLoading(true);
+    // await dispatch(sendMessageReq(requestData));
+    // setIsSubmitted(true);
   };
 
   useEffect(() => {
@@ -144,17 +144,27 @@ const Form: React.FC = () => {
   }, [isSubmitted]);
 
   const handleNextPage = () => {
-    navigate('/preview');
-  }
+    navigate("/preview");
+  };
 
   return (
     <Container className="container">
-      <Title variant="h4" className="">🧙🏿‍♂️🧙🏿‍♂️Tell us what you want?🪄🧙🏻‍♀️🧙🏻‍♀️</Title>
+      <Title variant="h4" className="">
+        🧙🏿‍♂️🧙🏿‍♂️Tell us what you want?🪄🧙🏻‍♀️🧙🏻‍♀️
+      </Title>
       <FormContainer onSubmit={handleSubmit}>
-        <CustomTextField changeHandler={handleChange} label="Keywords" name="keywords" 
-        placeholder="Core topics or phrases that should be prominently featured"/>
-        <CustomTextField changeHandler={handleChange} label="Video Duration" name="videoDuration" 
-        placeholder="Total length of the video (e.g., 30 seconds, 1 minutes)"/>
+        <TagsInput
+          value={tag}
+          onChange={setTag}
+          name="keywords"
+          placeHolder="Enter keywords, separated by pressing Return"
+        />
+        <CustomTextField
+          changeHandler={handleChange}
+          label="Video Duration"
+          name="videoDuration"
+          placeholder="Total length of the video (e.g., 30 seconds, 1 minutes)"
+        />
         <CustomDropDown
           label="Video Type"
           name="videoType"
@@ -187,9 +197,16 @@ const Form: React.FC = () => {
           Submit
         </SubmitButton>
       </FormContainer>
-      <button onClick={handleNextPage} className={`${!isSubmitted ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'
-        } text-white font-bold py-2 px-4 rounded flex items-center`} disabled={!isSubmitted} >
-          {isLoading ? (
+      <button
+        onClick={handleNextPage}
+        className={`${
+          !isSubmitted
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-blue-500 hover:bg-blue-700"
+        } text-white font-bold py-2 px-4 rounded flex items-center`}
+        disabled={!isSubmitted}
+      >
+        {isLoading ? (
           <>
             <svg
               className="animate-spin h-5 w-5 mr-3 text-white"
@@ -212,9 +229,9 @@ const Form: React.FC = () => {
             </svg>
             Processing...
           </>
-          ) : (
-            'Preview'
-          )}
+        ) : (
+          "Preview"
+        )}
       </button>
     </Container>
   );

@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 /* Basic reset and base styles */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -20,7 +21,7 @@ body, html {
 }
 
 /* Landing Page styles */
- .landing-page {
+.landing-page {
   background-color: var(--tiktok-black);
   color: var(--tiktok-white);
   transition: background-color 0.3s ease;
@@ -33,7 +34,6 @@ body, html {
   position: relative;
   overflow: hidden;
 }
-
 
 .landing-page h1 {
   color: var(--tiktok-pink);
@@ -59,7 +59,7 @@ body, html {
 .landing-page button:hover {
   background-color: var(--tiktok-pink);
   transform: scale(1.05);
-} 
+}
 
 @keyframes fadeIn {
   from {
@@ -86,4 +86,35 @@ body, html {
   to {
     transform: translateX(0);
   }
+}
+
+.rti--container {
+  --rti-bg: #397684 !important;
+  --rti-border: '2px solid #2af0ea' !important;
+  border-radius: 0.9rem !important;
+  --rti-main: '#3182ce';
+  --rti-radius: '0.375rem';
+  --rti-s: '0.5rem'; /* spacing */
+  --rti-tag: '#edf2f7';
+  --rti-tag-remove: '#e53e3e';
+}
+
+.rti--input {
+  background-color: transparent !important;
+  color: white !important;
+  padding-left: 5px !important;
+}
+
+.rti--input::placeholder {
+  color: white !important;
+  opacity: 1;
+}
+
+.rti--tag {
+  background-color: var(--tiktok-pink) !important;
+  color: white !important;
+}
+
+.rti--tag button {
+  color: white !important;
 }
