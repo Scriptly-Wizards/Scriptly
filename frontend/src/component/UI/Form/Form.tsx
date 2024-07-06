@@ -61,7 +61,7 @@ const VideoDurationOptions = [
   { value: "15 seconds", label: "15 seconds" },
   { value: "30 seconds", label: "30 seconds" },
   { value: "45 seconds", label: "45 seconds" },
-  { value: "60 seconds", label: "60 seconds" }
+  { value: "60 seconds", label: "60 seconds" },
 ];
 
 const VideoTypeOptions = [
@@ -124,9 +124,9 @@ const Form: React.FC = () => {
       script_format: values.scriptFormat,
     };
     console.log(requestData);
-    // setIsLoading(true);
-    // await dispatch(sendMessageReq(requestData));
-    // setIsSubmitted(true);
+    setIsLoading(true);
+    await dispatch(sendMessageReq(requestData));
+    setIsSubmitted(true);
   };
 
   useEffect(() => {
@@ -186,9 +186,13 @@ const Form: React.FC = () => {
           values={ScriptFormatOptions}
           currentValue={values.scriptFormat}
         />
-        {isSubmitted || isLoading ? <PreviewBtn isLoading={isLoading} handleNextPage={handleNextPage} /> : 
-        <SubmitButton type="submit" variant="contained">
-          Submit </SubmitButton>}
+        {isSubmitted || isLoading ? (
+          <PreviewBtn isLoading={isLoading} handleNextPage={handleNextPage} />
+        ) : (
+          <SubmitButton type="submit" variant="contained">
+            Submit{" "}
+          </SubmitButton>
+        )}
       </FormContainer>
     </Container>
   );
