@@ -6,6 +6,7 @@ import CustomDropDown from "./CustomDropDown";
 import { sendMessageReq } from "../../../store/message/messageService";
 import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
+import PreviewBtn from "./PreviewBtn";
 import { TagsInput } from "react-tag-input-component";
 
 const Container = styled(Paper)({
@@ -56,19 +57,17 @@ type Values = {
   scriptFormat: string;
 };
 
+const VideoDurationOptions = [
+  { value: "15 seconds", label: "15 seconds" },
+  { value: "30 seconds", label: "30 seconds" },
+  { value: "45 seconds", label: "45 seconds" },
+  { value: "60 seconds", label: "60 seconds" }
+];
+
 const VideoTypeOptions = [
   { value: "People", label: "People" },
   { value: "Objects", label: "Objects" },
   { value: "Animated", label: "Animated" },
-];
-
-const VideoGenreOptions = [
-  { value: "Documentary", label: "Documentary" },
-  { value: "Educational", label: "Educational" },
-  { value: "Promotional", label: "Promotional" },
-  { value: "Testimonial", label: "Testimonial" },
-  { value: "Tutorial", label: "Tutorial" },
-  { value: "Entertainment", label: "Entertainment" },
 ];
 
 const PurposeOptions = [
@@ -78,13 +77,6 @@ const PurposeOptions = [
   { value: "Testimonial", label: "Testimonial" },
   { value: "Tutorial", label: "Tutorial" },
   { value: "Entertainment", label: "Entertainment" },
-];
-
-const SettingOptions = [
-  { value: "Indoor", label: "Indoor" },
-  { value: "Outdoor", label: "Outdoor" },
-  { value: "Office", label: "Office" },
-  { value: "Home", label: "Home" },
 ];
 
 const ScriptFormatOptions = [
@@ -159,11 +151,12 @@ const Form: React.FC = () => {
           name="keywords"
           placeHolder="Enter keywords, separated by pressing Return"
         />
-        <CustomTextField
-          changeHandler={handleChange}
+        <CustomDropDown
           label="Video Duration"
           name="videoDuration"
-          placeholder="Total length of the video (e.g., 30 seconds, 1 minutes)"
+          changeHandler={handleChange}
+          values={VideoDurationOptions}
+          currentValue={values.videoDuration}
         />
         <CustomDropDown
           label="Video Type"
@@ -193,46 +186,10 @@ const Form: React.FC = () => {
           values={ScriptFormatOptions}
           currentValue={values.scriptFormat}
         />
+        {isSubmitted || isLoading ? <PreviewBtn isLoading={isLoading} handleNextPage={handleNextPage} /> : 
         <SubmitButton type="submit" variant="contained">
-          Submit
-        </SubmitButton>
+          Submit </SubmitButton>}
       </FormContainer>
-      <button
-        onClick={handleNextPage}
-        className={`${
-          !isSubmitted
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-blue-500 hover:bg-blue-700"
-        } text-white font-bold py-2 px-4 rounded flex items-center`}
-        disabled={!isSubmitted}
-      >
-        {isLoading ? (
-          <>
-            <svg
-              className="animate-spin h-5 w-5 mr-3 text-white"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            Processing...
-          </>
-        ) : (
-          "Preview"
-        )}
-      </button>
     </Container>
   );
 };
