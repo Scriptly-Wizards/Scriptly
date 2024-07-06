@@ -8,26 +8,44 @@ import { useAppDispatch } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled(Paper)({
-    backgroundColor: "#ffffff",
-    padding: 30,
-    textAlign: "center",
-    width: "80%", // Adjust width as needed
-    maxWidth: 600,
-    margin: "auto",
-  });
-  
-  const FormContainer = styled("form")({
-    display: "flex",
-    flexDirection: "column",
-  });
-  
-  const Title = styled(Typography)({
-    margin: "0px 0 20px 0",
-  });
-  
-  const SubmitButton = styled(Button)({
-    margin: "20px 0",
-  });
+  backgroundColor: "Black",
+  padding: "30px",
+  textAlign: "center",
+  width: "100%", 
+  maxWidth: "800px",
+  margin: "auto",
+  marginTop: "1rem",
+  border: "2px solid #2af0ea",
+  borderRadius: "1rem",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  animation: "fadeIn 1s ease, borderFadeIn 2s ease",
+  color: "white",
+});
+
+const FormContainer = styled("form")({
+  display: "flex",
+  flexDirection: "column",
+  // alignItems: "center",
+  animation: "fadeInUp 1s ease",
+});
+
+const Title = styled(Typography)({
+  margin: "0px 0 20px 0",
+  color: "#2af0ea",
+  animation: "slideInFromLeft 1s ease",
+});
+
+const SubmitButton = styled(Button)({
+  margin: "20px auto",
+  width: "20%",
+  backgroundColor: "#2af0ea",
+  color: "white",
+  "&:hover": {
+    backgroundColor: "#ee1d52",
+  },
+  animation: "slideInFromRight 1s ease",
+});
+
 
 /** sendMessageReq req body */
 type Values = {
@@ -130,8 +148,8 @@ const Form: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Title variant="h4">Tell us what you want?</Title>
+    <Container className="container">
+      <Title variant="h4" className="">🧙🏿‍♂️🧙🏿‍♂️Tell us what you want?🪄🧙🏻‍♀️🧙🏻‍♀️</Title>
       <FormContainer onSubmit={handleSubmit}>
         <CustomTextField changeHandler={handleChange} label="Keywords" name="keywords" 
         placeholder="Core topics or phrases that should be prominently featured"/>
