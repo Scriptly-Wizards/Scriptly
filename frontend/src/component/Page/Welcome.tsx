@@ -1,42 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Form from '../UI/Form/Form';
+import "./Welcome.css";
+import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
-  const formRef = useRef<HTMLDivElement>(null);
-  const [showForm, setShowForm] = useState(false);
-
+  const navigate = useNavigate();
   const scrollToForm = () => {
-    setShowForm(true);
+    navigate("/form");
   };
 
-  useEffect(() => {
-    if (showForm && formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [showForm]);
-
   return (
-    <div>
-      <div className="landing-page h-screen flex flex-col justify-center items-center text-center relative">
-      <img 
-          src={`${process.env.PUBLIC_URL}/img/elisabeth-pieringer-9paY25EHOBo-unsplash.gif`} 
-          alt="Welcome"
-          className="w-auto h-auto opacity-20 object-cover absolute top-0"
-        />
-        <h1 className="font-bold bg-black bg-opacity-100 p-4 rounded z-10">Welcome to Your <br/>Viral TikTok Script Generator</h1>
-        
-        <button onClick={scrollToForm} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded z-10">GET MY SCRIPT</button>
-        
-      </div>
-      <div style={{ marginBottom: '10rem' }}>
-        {showForm && (
-          <div ref={formRef}>
-            <Form />
-          </div>
-        )}
-      </div>
+    <div className="landing-page">
+      <img
+        src={`${process.env.PUBLIC_URL}/img/elisabeth-pieringer-9paY25EHOBo-unsplash.gif`}
+        alt="Welcome"
+        className="welcome-image"
+      />
+      <h1 className="welcome-title">
+        Welcome to Your <br />
+        Viral TikTok Script Generator
+      </h1>
+      <p className="welcome-description">
+        <span>Scriptly</span> is a recipe-style generator designed for TikTok
+        for TikTok users. It turns user prompts into GenAI inputs to create
+        shooting guides, scripts, suggestions, music, and samples.
+      </p>
+      <button onClick={scrollToForm} className="get-script-btn">
+        GET MY SCRIPT
+      </button>
     </div>
   );
-}
+};
 
 export default Welcome;
