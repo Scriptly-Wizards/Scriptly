@@ -4,7 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export interface CustomMessage {
   id: string;
   created_at: number;
-  value: string;
+  value: string | null;
 }
 
 interface MessageState {

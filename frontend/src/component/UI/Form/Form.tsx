@@ -29,7 +29,7 @@ const Container = styled(Paper)({
     margin: "20px 0",
   });
 
-/** req 格式 */
+/** sendMessageReq req body */
 type Values = {
   keywords: string;
   videoDuration: string;

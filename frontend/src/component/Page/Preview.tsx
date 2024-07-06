@@ -12,20 +12,16 @@ const Preview = () => {
   const dataFromStore = useSelector(
     (state: RootState) => state.message.message
   );
-  const pdfUrl = useSelector(
-    (state: RootState) => state.pdfFile.pdfUrl
-  );
-  const error = useSelector(
-    (state: RootState) => state.pdfFile.error
+  const {pdfUrl, error} = useSelector(
+    (state: RootState) => state.pdfFile
   );
   const [data, setData] = useState<CustomMessage | null>(null);
 
   useEffect(() => {
-    console.log('useEffect data', data);
-    console.log('useEffect dataFromStore', dataFromStore);
-    setData(dataFromStore);
-    dispatch(getPdfFile({id: "thread_SfLzyAdybkDFhr5dU6JBFLyo"}));
-    console.log('useEffect error', error);
+    setData(dataFromStore ?? null);
+    if (dataFromStore?.id) {
+      dispatch(getPdfFile({ id: dataFromStore.id }));
+    }
   }, [data, dataFromStore, dispatch]);
 
   return (

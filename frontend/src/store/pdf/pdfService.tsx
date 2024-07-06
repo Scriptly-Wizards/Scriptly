@@ -32,10 +32,8 @@ export const getPdfFile = (pdfReq: PdfReq) => {
       const file = await fetchPdfFile();
       const url = window.URL.createObjectURL(file);
       dispatch(setPdfFile(url));
-      console.log('Success');
     } catch (error) {
       dispatch(setError(true));
-      console.log('Failed');
     }
   }
 }

@@ -34,9 +34,8 @@ export const sendMessageReq = (messageReq: MessageReq) => {
     try {
       const result = await fetchData();
       dispatch(setMessage(result.data as CustomMessage));
-      console.log('Success');
     } catch(error) {
-      console.log('Sent Failed');
+      throw new Error('Sending message request failed');
     }
   }
 }
