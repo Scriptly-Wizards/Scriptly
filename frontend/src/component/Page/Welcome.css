@@ -1,0 +1,54 @@
+/* Welcome.css */
+.landing-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.welcome-image {
+  width: auto;
+  height: auto;
+  opacity: 0.2;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+.welcome-title {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  position: relative;
+  z-index: 10;
+  margin-top: -100px;
+}
+
+.welcome-description {
+  span {
+    color: var(--primary-500);
+    font-weight: bold;
+    font-size: larger;
+    font-style: italic;
+  }
+  line-height: 2;
+  color: var(--text-secondary-color);
+  margin-bottom: 1.5rem;
+  max-width: 35em;
+  font-size: large;
+  font-weight: 500;
+  text-align: left;
+}
+
+.get-script-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6; /* Tailwind bg-blue-500 */
+  color: white;
+  border-radius: 0.25rem;
+  z-index: 10;
+}
