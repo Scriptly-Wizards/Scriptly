@@ -1,3 +1,4 @@
+import ENVIRONMENT from "../../Environment";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setError, setPdfFile } from "./pdfSlice";
 
@@ -12,7 +13,7 @@ export interface pdfFile {
 export const getPdfFile = (pdfReq: PdfReq) => {
   return async (dispatch: Dispatch) => {
     const fetchPdfFile = async () => {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/assistant/pdf/', {
+      const response = await fetch(`${ENVIRONMENT.apiUrl}/assistant/pdf/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

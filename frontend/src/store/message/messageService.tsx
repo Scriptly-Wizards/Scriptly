@@ -1,3 +1,4 @@
+import ENVIRONMENT from '../../Environment';
 import { Dispatch } from "@reduxjs/toolkit";
 import { CustomMessage, setMessage } from "./messageSlice";
 
@@ -15,7 +16,7 @@ export const sendMessageReq = (messageReq: MessageReq) => {
   return async (dispatch: Dispatch) => {
     
     const fetchData = async () => {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/assistant/', {
+      const response = await fetch(`${ENVIRONMENT.apiUrl}/assistant/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

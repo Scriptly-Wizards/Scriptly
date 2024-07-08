@@ -20,7 +20,7 @@ const Preview = () => {
     if (dataFromStore?.id) {
       dispatch(getPdfFile({ id: dataFromStore.id }));
     }
-  }, [data, dataFromStore, dispatch]);
+  }, []);
 
   return (
     <div>
