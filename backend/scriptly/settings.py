@@ -22,6 +22,9 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -32,7 +35,8 @@ SECRET_KEY = 'django-insecure-@8guaz85_8xl3uw&wf359no19tjom&_l93167(!jws#9te8d^#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['scriptly-105d4cc5ed46.herokuapp.com',
+                 'localhost', '127.0.0.1', '0.0.0.0', 'scriptly-wizard-7c14c9048571.herokuapp.com']
 
 
 # Application definition
@@ -45,11 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'assistant',
-    'corsheaders' # 添加這一行
+    'corsheaders'  # 添加這一行
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',  # 添加這一行
     'django.middleware.common.CommonMiddleware',
@@ -134,4 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://scriply-lena-zhangs-projects.vercel.app",
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
