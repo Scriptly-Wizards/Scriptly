@@ -2,6 +2,8 @@
 
 SCRIPLTY is an AI-powered platform designed to streamline the creative process for TikTok users. It provides comprehensive shooting recipes based on user prompts, including detailed video scripts, shooting suggestions, curated music tracks, and recommended samples. This helps users create engaging, high-quality content effortlessly.
 
+Visit our [website](https://scriply-lena-zhangs-projects.vercel.app/).
+
 ## Installation
 
 1. **Clone the repository:**
